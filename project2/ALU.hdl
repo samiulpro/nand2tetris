@@ -41,7 +41,6 @@ CHIP ALU {
         ng;      // if (out < 0)  equals 1, else 0
 
     PARTS:
-    // This part handles the logical process
     And16(a=x, b[0..15]=false, out=x0);
 
     Mux16(a=x, b=x0, sel=zx, out=zxout);
