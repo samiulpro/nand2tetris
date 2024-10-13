@@ -142,16 +142,27 @@ def first_pass(lines):
             
 first_pass(cleaned_lines)
 
+final_lines = []
 line_number = 0    
 for i in cleaned_lines:
     if i.startswith("@"):
         if i[1:].isdigit():
             print(a_instruction(int(i[1:])))
+            final_lines.append(str(a_instruction(int(i[1:]))))
         else:
             symbol = i[1:]
             address = resolve_symbol(symbol)
             print(a_instruction(address))
+            final_lines.append(str(a_instruction(address)))
     elif not (i.startswith("(") and i.endswith(")")):
         print(c_instruction(i))
+        final_lines.append(c_instruction(i))
         
     line_number +=1
+    
+    
+with open("Max.hack", "a") as hack_file:
+    for line in final_lines:
+        hack_file.write(line+'\n')
+    
+    print("Successful")
